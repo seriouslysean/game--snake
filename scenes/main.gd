@@ -2,6 +2,8 @@ extends Node
 
 @export var snake_scene : PackedScene
 
+const INITIAL_SNAKE_LENGTH = 3
+
 var score : int
 var game_started : bool = false
 
@@ -44,7 +46,7 @@ func generate_snake():
 	snake_data.clear()
 	snake.clear()
 	#starting with the start_pos, create tail segments vertically down
-	for i in range(3):
+	for i in range(INITIAL_SNAKE_LENGTH):
 		add_segment(start_pos + Vector2(0, i))
 
 func add_segment(pos):
@@ -98,9 +100,8 @@ func _on_move_timer_timeout():
 	check_food_eaten()
 	
 func check_out_of_bounds():
-	for i in range(1, len(snake_data)):
-		if snake_data[i] == snake_data[0]:
-			end_game()
+	if snake_data[0].x < 0 or snake_data[0].x >= cells or snake_data[0].y < 0 or snake_data[0].y >= cells:
+		end_game()
 
 func check_self_eaten():
 	pass
@@ -116,7 +117,11 @@ func move_food():
 	regen_food = true
 	
 func check_food_eaten():
-	pass
+	if snake_data[0] == food_pos:
+		score += 1
+		$HUD.get_node("ScoreLabel").text = str(score)
+		add_segment(old_data[-1])
+		move_food()
 
 func end_game():
 	pass
