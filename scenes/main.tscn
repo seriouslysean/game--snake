@@ -1,9 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://c766diqa4u3aj"]
+[gd_scene load_steps=7 format=3 uid="uid://c766diqa4u3aj"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_6ise4"]
 [ext_resource type="PackedScene" uid="uid://chc6frtioemsc" path="res://scenes/hud.tscn" id="2_2j61x"]
 [ext_resource type="Texture2D" uid="uid://d1ndshrhvcm00" path="res://assets/background.png" id="2_ns5ta"]
 [ext_resource type="PackedScene" uid="uid://bb641kkqafnec" path="res://scenes/snake_segment.tscn" id="2_oxqos"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e74xl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4wq"]
+bg_color = Color(1, 0, 0, 0.588235)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [node name="Main" type="Node"]
 script = ExtResource("1_6ise4")
@@ -18,5 +32,28 @@ centered = false
 
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="Food" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -525.0
+offset_right = -450.0
+offset_bottom = -475.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(2.08165e-12, 2.08165e-12)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_e74xl")
+
+[node name="Panel" type="Panel" parent="Food"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ya4wq")
 
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

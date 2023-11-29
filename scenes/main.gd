@@ -23,6 +23,10 @@ var right = Vector2(1, 0)
 var move_direction : Vector2
 var can_move : bool = false
 
+# food variables
+var food_pos : Vector2
+var regen_food: bool = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	new_game()
@@ -33,6 +37,7 @@ func new_game():
 	move_direction = up
 	can_move = true
 	generate_snake()
+	move_food()
 	
 func generate_snake():
 	old_data.clear()
@@ -88,3 +93,30 @@ func _on_move_timer_timeout():
 		if i > 0:
 			snake_data[i] = old_data[i - 1]
 		snake[i].position = (snake_data[i] * cell_size) + Vector2(0, cell_size)
+	check_out_of_bounds()
+	check_self_eaten()
+	check_food_eaten()
+	
+func check_out_of_bounds():
+	for i in range(1, len(snake_data)):
+		if snake_data[i] == snake_data[0]:
+			end_game()
+
+func check_self_eaten():
+	pass
+	
+func move_food():
+	while regen_food:
+		regen_food = false
+		food_pos = Vector2(randi_range(0, cells - 1), randi_range(0, cells - 1))
+		for i in snake_data:
+			if food_pos == i:
+				regen_food = true
+	$Food.position = (food_pos * cell_size) + Vector2(0, cell_size)
+	regen_food = true
+	
+func check_food_eaten():
+	pass
+
+func end_game():
+	pass
