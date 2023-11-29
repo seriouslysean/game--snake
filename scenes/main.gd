@@ -56,27 +56,23 @@ func _process(delta):
 func move_snake():
 	if not can_move:
 		return
-	# update movement from key presses
-	if Input.is_action_just_pressed("move_up") and move_direction != down:
-		move_direction = up
-		can_move = false
-		if not game_started:
-			start_game()
-	if Input.is_action_just_pressed("move_right") and move_direction != left:
-		move_direction = right
-		can_move = false
-		if not game_started:
-			start_game()
-	if Input.is_action_just_pressed("move_down") and move_direction != up:
-		move_direction = down
-		can_move = false
-		if not game_started:
-			start_game()
-	if Input.is_action_just_pressed("move_left") and move_direction != right:
-		move_direction = left
-		can_move = false
-		if not game_started:
-			start_game()
+
+	var direction_mapping = {
+		"move_up": up,
+		"move_right": right,
+		"move_down": down,
+		"move_left": left
+	}
+
+	for action in direction_mapping.keys():
+		var direction = direction_mapping[action]
+		
+		if Input.is_action_just_pressed(action) and move_direction != direction:
+			move_direction = direction
+			can_move = false
+			if not game_started:
+				start_game()
+			break
 			
 func start_game():
 	game_started = true
