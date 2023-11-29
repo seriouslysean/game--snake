@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c766diqa4u3aj"]
+[gd_scene load_steps=8 format=3 uid="uid://c766diqa4u3aj"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_6ise4"]
 [ext_resource type="PackedScene" uid="uid://chc6frtioemsc" path="res://scenes/hud.tscn" id="2_2j61x"]
 [ext_resource type="Texture2D" uid="uid://d1ndshrhvcm00" path="res://assets/background.png" id="2_ns5ta"]
 [ext_resource type="PackedScene" uid="uid://bb641kkqafnec" path="res://scenes/snake_segment.tscn" id="2_oxqos"]
+[ext_resource type="PackedScene" uid="uid://b6xx8ud8j52td" path="res://scenes/game_over_menu.tscn" id="5_twien"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e74xl"]
 
@@ -55,5 +56,7 @@ offset_top = 10.0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ya4wq")
+
+[node name="GameOverMenu" parent="." instance=ExtResource("5_twien")]
 
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
