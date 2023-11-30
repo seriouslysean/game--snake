@@ -52,9 +52,9 @@ func generate_snake():
 	snake_data.clear()
 	snake.clear()
 
-	# Starting with the start_pos, create tail segments vertically down
+	# Starting with the start_pos, create tail segments on the same square
 	for i in range(INITIAL_SNAKE_LENGTH):
-		add_segment(start_pos + Vector2(0, i))
+		add_segment(start_pos)
 
 func add_segment(pos):
 	snake_data.append(pos)
@@ -80,8 +80,8 @@ func move_snake():
 
 	for action in direction_mapping.keys():
 		var direction = direction_mapping[action]
-
-		if Input.is_action_just_pressed(action) and move_direction != direction:
+		if Input.is_action_just_pressed(action) and (not game_started or move_direction != -direction):
+			print(action)
 			move_direction = direction
 			can_move = false
 			if not game_started:
