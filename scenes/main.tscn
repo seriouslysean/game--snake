@@ -58,5 +58,7 @@ offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ya4wq")
 
 [node name="GameOverMenu" parent="." instance=ExtResource("5_twien")]
+process_mode = 2
 
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="restart" from="GameOverMenu" to="." method="_on_game_over_menu_restart"]

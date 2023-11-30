@@ -12,7 +12,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[node name="SnakeSegment" type="Panel"]
+[node name="SnakeSegment" type="Panel" groups=["segments"]]
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 49.0

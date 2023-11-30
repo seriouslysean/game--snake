@@ -34,6 +34,9 @@ func _ready():
 	new_game()
 	
 func new_game():
+	get_tree().paused = false
+	get_tree().call_group("segments", "queue_free")
+	$GameOverMenu.hide()
 	score = 0
 	$HUD.get_node("ScoreLabel").text = str(score)
 	move_direction = up
@@ -124,4 +127,11 @@ func check_food_eaten():
 		move_food()
 
 func end_game():
-	pass
+	$GameOverMenu.show()
+	$MoveTimer.stop()
+	game_started = false
+	get_tree().paused = true
+
+
+func _on_game_over_menu_restart():
+	new_game()
